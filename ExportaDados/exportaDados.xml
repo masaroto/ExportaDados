@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="5439cea2-a5c1-46bf-88d6-e3c66b8063ba" activeEnvironment="Default" name="EXPORTA-DADOS IST" resourceRoot="" soapui-version="5.7.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="d51faadc-bade-4be2-a6ed-b1957425fe3e" wsaVersion="NONE" name="ExportaDadosWsServiceSoapBinding" type="wsdl" bindingName="{http://services.soc.age.com/}ExportaDadosWsServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs?wsdl"><con:part><con:url>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ExportaDadosWsService" targetNamespace="http://services.soc.age.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soc.age.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.soc.age.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="exportaDadosWs" type="tns:exportaDadosWs"/>
+      <xs:element name="exportaDadosWsResponse" type="tns:exportaDadosWsResponse"/>
+      <xs:complexType name="exportaDadosWs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:exportaDadosWsVo"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="exportaDadosWsVo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arquivo" type="xs:base64Binary"/>
+          <xs:element minOccurs="0" name="campoLivre1" type="xs:string"/>
+          <xs:element minOccurs="0" name="campoLivre2" type="xs:string"/>
+          <xs:element minOccurs="0" name="campoLivre3" type="xs:string"/>
+          <xs:element minOccurs="0" name="campoLivre4" type="xs:string"/>
+          <xs:element minOccurs="0" name="campoLivre5" type="xs:string"/>
+          <xs:element name="erro" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="mensagemErro" type="xs:string"/>
+          <xs:element minOccurs="0" name="parametros" type="xs:string"/>
+          <xs:element minOccurs="0" name="retorno" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipoArquivoRetorno" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="exportaDadosWsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:exportaDadosWsVo"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="WSException" type="tns:WSException"/>
+      <xs:complexType name="WSException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="exportaDadosWs">
+    <wsdl:part element="tns:exportaDadosWs" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="WSException">
+    <wsdl:part element="tns:WSException" name="WSException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="exportaDadosWsResponse">
+    <wsdl:part element="tns:exportaDadosWsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ExportaDadosWs">
+    <wsdl:operation name="exportaDadosWs">
+      <wsdl:input message="tns:exportaDadosWs" name="exportaDadosWs"></wsdl:input>
+      <wsdl:output message="tns:exportaDadosWsResponse" name="exportaDadosWsResponse"></wsdl:output>
+      <wsdl:fault message="tns:WSException" name="WSException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExportaDadosWsServiceSoapBinding" type="tns:ExportaDadosWs">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="exportaDadosWs">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="exportaDadosWs">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="exportaDadosWsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExportaDadosWsService">
+    <wsdl:port binding="tns:ExportaDadosWsServiceSoapBinding" name="ExportaDadosWsPort">
+      <soap:address location="https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]>
+   </con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type>
+   </con:part></con:definitionCache>
+   <con:endpoints>
+      <con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint>
+   </con:endpoints>
+   <con:operation id="0af2b103-7c12-47fa-b9af-77a7dff1fbad" isOneWay="false" action="" name="exportaDadosWs" bindingOperationName="exportaDadosWs" type="Request-Response" outputName="exportaDadosWsResponse" inputName="exportaDadosWs" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4238caa2-2f78-4fb0-b44f-7e4a832c0f5d" name="01.02.04 - Cadastro de Funcionários por situação (FOL)"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r
+         <!--Optional:-->\r
+         <arg0>\r
+           <parametros>{'empresa':'521210','codigo':'23029','chave':'7f6f787af521ac42a3ce','tipoSaida':'json','empresaTrabalho':'646074','cpf':'','parametroData':'','dataInicio':'','dataFim':''}</parametros>
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="36341629-6675-41a7-9b74-4bc734d5788f" name="01.02 - Cadastro de empresas"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{'empresa'='521210','codigo'='28499','chave'='4d7aa77c3f116c01f57a','tipoSaida'='json'}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="6e4e1ddc-f437-4372-90bf-a2113f2fdb8b" name="01.01 - Tabela de Exames (Ativos / Inativos)"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521018","codigo":"18873","chave":"85b047f9a15f27418e95","tipoSaida":"json","ativo":"1","inativo":"0"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="25bbb28d-d3aa-4f1b-92f7-1ac8b4d05e55" name="01 - Lista DRs SESI"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{'empresa':'521018','codigo':'27464','chave':'794c55e3404f3a340422','tipoSaida':'json'}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="473f820f-346b-4b07-8e7a-d68f027a092d" name="01.02.03 - Cadastro de Unidades (todas empresas)"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"646074","codigo":"191439","chave":"737cd1dacbb2bd85845e","tipoSaida":"json"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="981d00f4-a550-4fa3-96ff-77a7b4c64a62" name="01.02.02 - Hierarquias do GHE"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"646074","codigo":"187212","chave":"f80006dbc5acd0e9e310","tipoSaida":"json","ghe":""}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="0a5c75c5-cb96-441e-a8ef-75dbc75cdb0d" name="01.02.04.01 - Exames do Funcionário"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"646074","codigo":"23280","chave":"3f5148b89e07fe31e08c","tipoSaida":"json", "funcionario":"856576517"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="02e52591-c811-4981-8500-2072f0066cbc" name="01.02.01 - Hierarquia da empresa" wssPasswordType="PasswordDigest"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@wss-time-to-live">60</con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{'empresa':'991134','codigo':'142067','chave':'3173d62db2ed653b48d7','tipoSaida':'json','ghe':''}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>U2116817</con:username><con:password>73b277595cf30806d9b609488e9c1f55716f3b72</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="a2cb7e24-e7f0-4714-a661-62e794d5febc" name="01.02.04.02 - ASO´s do Funcionário"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{'empresa':'646074','codigo':'184880','chave':'aa7dead39547624cf49e','tipoSaida':'json','funcionario':'208693','tipoASO':'0,1,2,3,4,5,6','paramFiltroData':'0','dataInicio':'','dataFim':''}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="7c428169-65cf-4a0b-b899-67e1ee8c0b49" name="01.03 - GED S+"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521401","codigo":"195774","chave":"48d52e5982ff73eff3a2","tipoSaida":"json","empresaTrabalho":"932448","codigoUnidade":"","idUnidade":"","dataUpload":""}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="e66fb5b8-04ae-411a-a327-5817ce8a8cee" name="01.04 - SESINET - Contratos SESI DN"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521401","codigo":"170202","chave":"46f9d713ab4a45d10ae2","tipoSaida":"json","dataInicial":"27/03/2023","dataFinal":"30/04/2023", codigoDR="521024"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="9c0eb3a8-d7f6-401a-922e-cc30b50237e5" name="01.04.01 - SESINET - SESI - Estabelecimentos do DR"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521018","codigo":"158552","chave":"416862e868ad6e0ed889","tipoSaida":"json","codigoDR":"521024"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="897f04a5-2e8c-42ca-8daa-d103ce755ca9" name="01.05 - Usuários Médicos"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521401","codigo":"195782","chave":"ed1a5ffe41a279493128","tipoSaida":"json","conselhoClasse":""}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="71c34e86-8f13-4b9c-850e-14e4ff93cb42" name="01.06 - Tabela de prestadores"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521401","codigo":"195783","chave":"df9eef29ed78ec5a32a2","tipoSaida":"json"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="43d3eb74-cb96-4c32-ad87-f4e7ed15de2c" name="01.02.04.03 - Pedido de exames"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{'empresa':'645938','codigo':'184903','chave':'f30b37215d8726beb950','tipoSaida':'json','paramSequencial':'0','sequenciaFicha':'','funcionarioInicio':'1','funcionarioFim':'99999999','paramData':'0','dataInicio':'01/07/2024','dataFim':'30/07/2024','paramFunc':'0','cpffuncionario':'','nomefuncionario':'','codpresta':'','nomepresta':'','paramPresta':'0','codunidade':'','nomeunidade':'','paramUnidade':'0'}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call><con:call id="6a6fa4bd-7050-4f54-a638-ccb80d519480" name="01.07 - Tipo SOCGED"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ws1.soc.com.br/WSSoc/services/ExportaDadosWs</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:exportaDadosWs>\r       
+         <arg0>\r
+            <parametros>{"empresa":"521401","codigo":"196527","chave":"e0445540ddd22238552e","tipoSaida":"json"}</parametros>\r
+         </arg0>\r
+      </ser:exportaDadosWs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soc.age.com/ExportaDadosWs/exportaDadosWs"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

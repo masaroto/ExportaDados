@@ -1,0 +1,45 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soc.age.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:uploadArquivo>
+         <!--Optional:-->
+         <arg0>
+         
+            <!-- Classificação fixa -->
+            <classificacao>RESULTADO_EXAME</classificacao>
+            
+            <!-- Exporta dados Pedido de Exames : CODIGOEMPRESA -->
+            <codigoEmpresa>932448</codigoEmpresa>
+            <!-- Exporta Dados Pedido de Exames : CODIGOFUNCIONARIO -->
+            <codigoFuncionario>6</codigoFuncionario>
+            <!-- Exporta Dados GED S+ : CODIGO_GED -->
+            <codigoGed>38403150</codigoGed>
+            <!-- Exporta Pedido de Exames : campo SEQUENCIAFICHA -->
+            <codigoSequencialFicha>271808073</codigoSequencialFicha>
+            <!-- Exporta Dados Tipo SocGed : buscar pelo código da empresa e localizar o item CODIGO 1013 ( Anexos Resultados de Exames) -->
+            <codigoTipoGed>1013</codigoTipoGed>
+            <!-- ENUM: XLS, RTF, PDF, RPT, TXT, CSV, ZIP, HTML, XML, REM, DAT, XLX, XLSX, JPEG, BMP, GIF, JPG, WMF, PNG, TIFF, RAR, DOC, DOCX, PPS, PPT, PPSX, PBIX, TIF, MP4; -->
+            <!-- Neste campo é necessário verificar o tipo de retorno do laboratório-->
+            <extensaoArquivo>PDF</extensaoArquivo>
+            <!--Optional:-->
+            <identificacaoVo>
+               <!--Optional:-->
+               <chaveAcesso>?</chaveAcesso>
+               <!--Optional:-->
+               <codigoEmpresaPrincipal>521401</codigoEmpresaPrincipal>
+               <!--Optional:-->
+               <codigoResponsavel>304655</codigoResponsavel>
+               <homologacao>false</homologacao>
+               <!--Optional:-->
+               <codigoUsuario>U2116807</codigoUsuario>
+            </identificacaoVo>
+   		    <!--tipo arraybyte-->
+            <arquivo>cid:158451</arquivo>
+         	   <!--Optional: [Nome do exame baseado na tabela TULLS].pdf-->
+            <!-- O minemonico é relativo ao Exporta dados 01.01 - Tabela de Exames (Ativos / Inativos) : COD -->
+            <nomeArquivo>exames_laboratoriais.pdf</nomeArquivo> 
+            <sobreescreveArquivo>false</sobreescreveArquivo>
+         </arg0>
+      </ser:uploadArquivo>
+   </soapenv:Body>
+</soapenv:Envelope>
