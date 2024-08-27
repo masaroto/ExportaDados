@@ -1,3 +1,6 @@
+using ExportaDados.Helpers;
+using ExportaDados.Interfaces;
+using ExportaDados.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,10 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
+//builder.Services.AddSingleton<SoupReqService>();
+builder.Services.AddScoped<SoupReqService>();
+builder.Services.AddTransient<IJsonUtils, JsonUtils>();
+builder.Services.AddTransient<IXmlUtils, XmlUtils>();
 //builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
 {

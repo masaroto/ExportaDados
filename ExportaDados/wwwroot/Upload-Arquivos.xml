@@ -12,7 +12,7 @@
             <codigoEmpresa>932448</codigoEmpresa>
             <!-- Exporta Dados Pedido de Exames : CODIGOFUNCIONARIO -->
             <codigoFuncionario>6</codigoFuncionario>
-            <!-- Exporta Dados GED S+ : CODIGO_GED -->
+            <!-- Exporta Dados GED S+ : CODIGO_GED -> Filtrar por CODIGO_FUNCIONARIO, PEGAR ULTIMO-->
             <codigoGed>38403150</codigoGed>
             <!-- Exporta Pedido de Exames : campo SEQUENCIAFICHA -->
             <codigoSequencialFicha>271808073</codigoSequencialFicha>

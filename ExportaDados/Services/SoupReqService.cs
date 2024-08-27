@@ -1,63 +1,99 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Xml.Linq;
+using ExportaDados.Helpers;
+using ExportaDados.Interfaces;
 using ExportaDados.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ExportaDados.Services
 {
     public class SoupReqService
     {
+        private readonly HttpClient _client;
+        private readonly IJsonUtils _jsonUtils;
+        private readonly IXmlUtils _xmlUtils;
+
+        public SoupReqService(HttpClient client, IJsonUtils json, IXmlUtils xmlUtils) {  
+            _client = client;
+            _jsonUtils = json;
+            _xmlUtils = xmlUtils;
+        }
+
         public List<SoupReq> listReq(XDocument soupXML)
         {
-            XNamespace con = "http://eviware.com/soapui/config";
-            var root = soupXML.Root.Descendants(con + "call");// <con:call
-
-            SoupReq.endpoint = root.FirstOrDefault()
-                                .Element(con + "endpoint").Value;
-
-            var reqList = root.Select(call => new SoupReq
-                            {
-                                name = call.Attribute("name").Value,
-                                bodyXML = call.Element(con + "request").Value,
-                                method = "POST"
-                            }).ToList();
-
+            var pathSoupXml = "exportaDados.xml";
+            
             //foreach (var i in reqList)
             //{
             //    System.Diagnostics.Debug.WriteLine($"\n====================== {i.name} =======================\n");
             //    System.Diagnostics.Debug.WriteLine(SoupReq.endpoint);
             //    System.Diagnostics.Debug.WriteLine(i.bodyXML);
             //}
-
-                //List <SoupReq> a = new List <SoupReq>();
-            return reqList;
+            return _xmlUtils.loadSoupXml(pathSoupXml);
         }
 
-        static public async Task<XDocument> doRequest(SoupReq req)
+        public async Task<string> doRequest(SoupReq req)
         {
-            var _client = new HttpClient();
             var content = new StringContent(req.bodyXML, Encoding.UTF8, "application/xml");
             var response = await _client.PostAsync(SoupReq.endpoint, content);  //sempre vai ser POST
             var xmlResponse = response.Content.ReadAsStringAsync().Result;
 
-            //System.Diagnostics.Debug.WriteLine("===== RESPONSE 2 =====");
+            //System.Diagnostics.Debug.WriteLine("===== RESPONSE =====");
             //System.Diagnostics.Debug.WriteLine(xmlResponse);
 
-            return XDocument.Parse(xmlResponse);
+            return xmlResponse;
         }
+        
+        //preenche XML de resposta
+        public XDocument fillUploadArquivos(Dictionary<string, string> response) {
+            //var uploadArqXML = XDocument.Load("wwwroot/Upload-Arquivos.xml");
+            //var root = uploadArqXML.Root.Descendants("arg0").FirstOrDefault();
 
-        static public XDocument fillUploadArquivos(Dictionary<string, XDocument> response) {
-            var uploadArqXML = XDocument.Load("wwwroot/Upload-Arquivos.xml");
-            var root = uploadArqXML.Root.Descendants("arg0").FirstOrDefault();
+            var pedidoExame = response["pedido de exames"];
+            var gedMais = response["ged s+"];
+            var socGed = response["tipo socged"];
 
-            var pedidoExame = response["pedido de exames"].Root.Descendants("return").FirstOrDefault();
-            System.Diagnostics.Debug.WriteLine(pedidoExame);
+            System.Diagnostics.Debug.WriteLine($"\n===== pedidoExameJson =====");
+            var pedidoJsonList = _xmlUtils.getValue(response["pedido de exames"], "retorno");//pega o json de dentro do XML
+            var list = _jsonUtils.loadList(pedidoJsonList, "CODIGOEMPRESA", "CODIGOFUNCIONARIO", "SEQUENCIAFICHA");
+            var linqList = list.GroupBy(dict => dict["SEQUENCIAFICHA"])
+                .Select(group => group.First())
+                .ToList();
+
+            //System.Diagnostics.Debug.WriteLine(a.Count());
+            //System.Diagnostics.Debug.WriteLine(x);
+
+
+            //foreach (var i in a)
+            //{
+            //    //var i = k.FirstOrDefault();
+            //    System.Diagnostics.Debug.WriteLine($"Empresa:{i["CODIGOEMPRESA"]}, CODIGOFUNCIONARIO: {i["CODIGOFUNCIONARIO"]}, SEQUENCIAFICHA: {i["SEQUENCIAFICHA"]}");
+            //}
+
+            //var x = a.GroupBy(i => i["SEQUENCIAFICHA"])
+            //    .Any(i => i.Count() > 1);
+
+            //var a = _jsonUtils.getLast(pedidoExameJson, "CODIGOFUNCIONARIO", "352084");
+            //a = _jsonUtils.getValue(a, "SEQUENCIAFICHA");
+
+
+
+            //var pedidoExameJson = this.getJsonList(pedidoExame, "retorno");
+            //var gedMaisJson = this.getJsonList(gedMais, "retorno", "CODIGO_GED");
+            //var socGedJson = this.getJsonList(socGed, "retorno", "CODIGO");
+            //if (x == null) return null;
 
 
             //var codigoEmpresa = root.Element("codigoEmpresa");
             //var codigoFuncionario = root.Element("codigoFuncionario");
+            //System.Diagnostics.Debug.WriteLine(codigoEmpresa);
+            //System.Diagnostics.Debug.WriteLine(codigoFuncionario);
             //root.Element("codigoEmpresa").Value = "";
             //root.Element("codigoFuncionario");
 
