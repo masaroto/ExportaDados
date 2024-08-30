@@ -51,21 +51,38 @@ namespace ExportaDados.Services
         }
         
         //preenche XML de resposta
-        public XDocument fillUploadArquivos(Dictionary<string, string> response) {
-            //var uploadArqXML = XDocument.Load("wwwroot/Upload-Arquivos.xml");
-            //var root = uploadArqXML.Root.Descendants("arg0").FirstOrDefault();
+        public List<string> fillUploadArquivos(Dictionary<string, string> response) {
+            var listXml = new List<string>();
 
-            var pedidoExame = response["pedido de exames"];
-            var gedMais = response["ged s+"];
-            var socGed = response["tipo socged"];
+            //var pedidoExame = response["pedido de exames"];
+            //var gedMais = response["ged s+"];
+            //var socGed = response["tipo socged"];
 
-            System.Diagnostics.Debug.WriteLine($"\n===== pedidoExameJson =====");
+            //System.Diagnostics.Debug.WriteLine($"\n===== pedidoExameJson =====");
             var pedidoJsonList = _xmlUtils.getValue(response["pedido de exames"], "retorno");//pega o json de dentro do XML
+            var gedJsonList = _xmlUtils.getValue(response["ged s+"], "retorno");//pega o json de dentro do XML
             var list = _jsonUtils.loadList(pedidoJsonList, "CODIGOEMPRESA", "CODIGOFUNCIONARIO", "SEQUENCIAFICHA");
-            var linqList = list.GroupBy(dict => dict["SEQUENCIAFICHA"])
+            var pedidoExameList = list.GroupBy(dict => dict["SEQUENCIAFICHA"])
                 .Select(group => group.First())
                 .ToList();
 
+            foreach (var pedidoExame in pedidoExameList)
+            {
+                //retorna json do ultimo funcionario
+                var xml = _xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString();
+                var jsonGed = _jsonUtils.getLast(gedJsonList, "CODIGO_FUNCIONARIO", pedidoExame["CODIGOFUNCIONARIO"]);
+                if (jsonGed == null) continue;
+                var codGed = _jsonUtils.getValue(jsonGed, "CODIGO_GED");//acessa json e retorna o valor no campo
+
+
+                _xmlUtils.setValue(ref xml, "codigoEmpresa", pedidoExame["CODIGOEMPRESA"]);
+                _xmlUtils.setValue(ref xml, "codigoFuncionario", pedidoExame["CODIGOFUNCIONARIO"]);
+                _xmlUtils.setValue(ref xml, "codigoGed", codGed);
+                _xmlUtils.setValue(ref xml, "codigoSequencialFicha", pedidoExame["SEQUENCIAFICHA"]);
+
+                listXml.Add(xml);
+            }
+            //linqList
             //System.Diagnostics.Debug.WriteLine(a.Count());
             //System.Diagnostics.Debug.WriteLine(x);
 
@@ -97,8 +114,10 @@ namespace ExportaDados.Services
             //root.Element("codigoEmpresa").Value = "";
             //root.Element("codigoFuncionario");
 
+            //_xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString();
+            listXml.Add(_xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString());
 
-            return new XDocument();
+            return listXml;
         }
     }
 }

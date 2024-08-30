@@ -49,9 +49,12 @@ namespace ExportaDados.Controllers
             //System.Diagnostics.Debug.WriteLine($"\n==========");
             //System.Diagnostics.Debug.WriteLine(response["pedido de exames"]);
 
-            _soupReq.fillUploadArquivos(response);
+            var ret = _soupReq.fillUploadArquivos(response).FirstOrDefault();
+            ret = null;
             //var requests = XDocument.Parse(xmlString
-            return Ok("Ok");
+            if (ret == null) return BadRequest("Verifique XML de entrada.");
+
+            return Ok(ret);
         }
     }
 }

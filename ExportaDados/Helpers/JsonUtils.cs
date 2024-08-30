@@ -37,10 +37,12 @@ namespace ExportaDados.Helpers
                 return null;
             }
 
-            return _jsonList.Children<JObject>()
-                    .Where(json => (string)json[attr] == value)
-                    .LastOrDefault()
-                    .ToString();
+            var jsonRet = _jsonList.Children<JObject>()
+                   .Where(json => (string)json[attr] == value)
+                   .LastOrDefault();
+                    //.ToString();
+            if (jsonRet == null) return null;
+            return jsonRet.ToString();
         }
 
         public List<Dictionary<string, string>> loadList(string json, params string[] attrs)
