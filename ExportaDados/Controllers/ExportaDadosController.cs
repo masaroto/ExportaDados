@@ -25,13 +25,16 @@ namespace ExportaDados.Controllers
         }
 
         [HttpPost]
-        public IActionResult listar()
+        //[Consumes("application/xml")]
+        public IActionResult listaExames(IFormFile file)
         {
+            
             var reqNameList = new List<string> { "01.02.04.03 - Pedido de exames", "01.03 - GED S+", "01.07 - Tipo SOCGED" };
             var response = new Dictionary<string, string>();//reponse["pedido exame"] = xml
 
-            var soupXML = XDocument.Load("exportaDados.xml");
-            var listReq = _soupReq.listReq(soupXML) //somente as req que precisam ser feitas
+
+
+            var listReq = _soupReq.listReq(file) //somente as req que precisam ser feitas
                 .Where(req => reqNameList.Contains(req.name))
                 .ToList();
 
@@ -46,12 +49,7 @@ namespace ExportaDados.Controllers
                 System.Diagnostics.Debug.WriteLine(req.bodyXML);
             }
 
-            //System.Diagnostics.Debug.WriteLine($"\n==========");
-            //System.Diagnostics.Debug.WriteLine(response["pedido de exames"]);
-
-            var ret = _soupReq.fillUploadArquivos(response).FirstOrDefault();
-            ret = null;
-            //var requests = XDocument.Parse(xmlString
+            var ret = _soupReq.fillUploadArquivos(response);
             if (ret == null) return BadRequest("Verifique XML de entrada.");
 
             return Ok(ret);

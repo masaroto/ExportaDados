@@ -25,17 +25,18 @@ namespace ExportaDados.Services
             _xmlUtils = xmlUtils;
         }
 
-        public List<SoupReq> listReq(XDocument soupXML)
+        public List<SoupReq> listReq(IFormFile file)
         {
-            var pathSoupXml = "exportaDados.xml";
-            
-            //foreach (var i in reqList)
-            //{
-            //    System.Diagnostics.Debug.WriteLine($"\n====================== {i.name} =======================\n");
-            //    System.Diagnostics.Debug.WriteLine(SoupReq.endpoint);
-            //    System.Diagnostics.Debug.WriteLine(i.bodyXML);
-            //}
-            return _xmlUtils.loadSoupXml(pathSoupXml);
+            //var pathSoupXml = "exportaDados.xml";
+            var tempPath = Path.GetTempFileName();
+            using (var stream = new FileStream(tempPath, FileMode.Create))
+            {
+                file.CopyToAsync(stream);
+
+            }
+
+            var soupXML = XDocument.Load(tempPath);
+            return _xmlUtils.loadSoupXml(soupXML.ToString());
         }
 
         public async Task<string> doRequest(SoupReq req)
@@ -54,10 +55,6 @@ namespace ExportaDados.Services
         public List<string> fillUploadArquivos(Dictionary<string, string> response) {
             var listXml = new List<string>();
 
-            //var pedidoExame = response["pedido de exames"];
-            //var gedMais = response["ged s+"];
-            //var socGed = response["tipo socged"];
-
             //System.Diagnostics.Debug.WriteLine($"\n===== pedidoExameJson =====");
             var pedidoJsonList = _xmlUtils.getValue(response["pedido de exames"], "retorno");//pega o json de dentro do XML
             var gedJsonList = _xmlUtils.getValue(response["ged s+"], "retorno");//pega o json de dentro do XML
@@ -71,51 +68,24 @@ namespace ExportaDados.Services
                 //retorna json do ultimo funcionario
                 var xml = _xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString();
                 var jsonGed = _jsonUtils.getLast(gedJsonList, "CODIGO_FUNCIONARIO", pedidoExame["CODIGOFUNCIONARIO"]);
+
+
+
                 if (jsonGed == null) continue;
                 var codGed = _jsonUtils.getValue(jsonGed, "CODIGO_GED");//acessa json e retorna o valor no campo
 
-
+                System.Diagnostics.Debug.WriteLine("\nANTES:");
+                System.Diagnostics.Debug.WriteLine(xml);
                 _xmlUtils.setValue(ref xml, "codigoEmpresa", pedidoExame["CODIGOEMPRESA"]);
                 _xmlUtils.setValue(ref xml, "codigoFuncionario", pedidoExame["CODIGOFUNCIONARIO"]);
                 _xmlUtils.setValue(ref xml, "codigoGed", codGed);
                 _xmlUtils.setValue(ref xml, "codigoSequencialFicha", pedidoExame["SEQUENCIAFICHA"]);
+                System.Diagnostics.Debug.WriteLine("\nDEPOIS:");
+                System.Diagnostics.Debug.WriteLine(xml);
 
                 listXml.Add(xml);
             }
-            //linqList
-            //System.Diagnostics.Debug.WriteLine(a.Count());
-            //System.Diagnostics.Debug.WriteLine(x);
-
-
-            //foreach (var i in a)
-            //{
-            //    //var i = k.FirstOrDefault();
-            //    System.Diagnostics.Debug.WriteLine($"Empresa:{i["CODIGOEMPRESA"]}, CODIGOFUNCIONARIO: {i["CODIGOFUNCIONARIO"]}, SEQUENCIAFICHA: {i["SEQUENCIAFICHA"]}");
-            //}
-
-            //var x = a.GroupBy(i => i["SEQUENCIAFICHA"])
-            //    .Any(i => i.Count() > 1);
-
-            //var a = _jsonUtils.getLast(pedidoExameJson, "CODIGOFUNCIONARIO", "352084");
-            //a = _jsonUtils.getValue(a, "SEQUENCIAFICHA");
-
-
-
-            //var pedidoExameJson = this.getJsonList(pedidoExame, "retorno");
-            //var gedMaisJson = this.getJsonList(gedMais, "retorno", "CODIGO_GED");
-            //var socGedJson = this.getJsonList(socGed, "retorno", "CODIGO");
-            //if (x == null) return null;
-
-
-            //var codigoEmpresa = root.Element("codigoEmpresa");
-            //var codigoFuncionario = root.Element("codigoFuncionario");
-            //System.Diagnostics.Debug.WriteLine(codigoEmpresa);
-            //System.Diagnostics.Debug.WriteLine(codigoFuncionario);
-            //root.Element("codigoEmpresa").Value = "";
-            //root.Element("codigoFuncionario");
-
-            //_xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString();
-            listXml.Add(_xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString());
+            listXml.Add(_xmlUtils.load("wwwroot/Upload-Arquivos.xml").ToString());//adiciona XML padrao
 
             return listXml;
         }
